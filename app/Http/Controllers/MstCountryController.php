@@ -38,7 +38,18 @@ class MstCountryController extends Controller
      */
     public function store(CountryCreateRequest $request)
     {
-        $country = MstCountry::create($request->validated());
+        // $country = MstCountry::create($request->validated());
+
+        $request->validate([
+            'name' => 'required|alpha'
+        ]);
+
+        MstCountry::create([
+            'name' => $request->name,
+            'short_name' => $request->name
+        ]);
+
+        return redirect(route('countries.index'))->with('successMessage', 'State Created Successfully !');
     }
 
     /**

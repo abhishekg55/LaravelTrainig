@@ -31,6 +31,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Name</th>
+                        <th>Short Name</th>
                         <th>States</th>
                         <th>Created At</th>
                         <th>View</th>
@@ -43,7 +44,8 @@
                     @foreach ($countries as $country)
                         <tr>
                             <td>{{ $country->id }}</td>
-                            <td>{{ $country->name }}</td>
+                            <td>{{ $country->all_caps }}</td>
+                            <td>{{ $country->short_name }}</td>
                             <td>
                                 <ul>
                                     @foreach ($country->states as $state)
