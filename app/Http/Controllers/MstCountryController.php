@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class MstCountryController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('AuthUser');
+    }
     /**
      * Display a listing of the resource.
      *

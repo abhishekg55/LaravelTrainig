@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MstCountryController;
 use App\Http\Controllers\StateController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,16 +21,22 @@ Route::get('/', function () {
 });
 
 
-Route::get('/countries', [MstCountryController::class, 'index'])->name('countries.index');
+Auth::routes();
 
-Route::POST('/countries/store', [MstCountryController::class, 'store'])->name('countries.store');
+// Route::middleware(['AuthUser'])->group(function () {
 
-Route::GET('/countries/edit/{id}', [MstCountryController::class, 'edit'])->name('countries.edit');
+Route::group(['prefix' => '/countries', 'as' => 'countries.'], function () {
 
-Route::DELETE('/countries/delete/{id}', [MstCountryController::class, 'destroy'])->name('countries.delete');
+    Route::GET('/', [MstCountryController::class, 'index'])->name('index');
 
-Route::GET('/countries/view/{id}', [MstCountryController::class, 'show'])->name('countries.show');
+    Route::POST('/store', [MstCountryController::class, 'store'])->name('store');
 
+    Route::GET('/edit/{id}', [MstCountryController::class, 'edit'])->name('edit');
+
+    Route::DELETE('/delete/{id}', [MstCountryController::class, 'destroy'])->name('delete');
+
+    Route::GET('/view/{id}', [MstCountryController::class, 'show'])->name('show');
+});
 
 Route::group(['prefix' => '/states', 'as' => 'states.'], function () {
 
@@ -44,6 +51,5 @@ Route::group(['prefix' => '/states', 'as' => 'states.'], function () {
     Route::GET('/view/{id}', [StateController::class, 'show'])->name('show');
 });
 
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// });
