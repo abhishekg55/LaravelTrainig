@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\MstCountry;
+use App\Models\Post;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,5 +17,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         MstCountry::factory(10)->create();
+        Post::factory(50)->create();
     }
 }
